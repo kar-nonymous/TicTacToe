@@ -6,6 +6,7 @@ namespace TicTacToe_Program
     {
         static void Main(string[] args)
         {
+            TossForTurn();
             char[] board = CreateBoard();
             char player = PlayerInput();
             ShowBoard(board);
@@ -44,13 +45,29 @@ namespace TicTacToe_Program
         }
         public static void MakeMove(char[] board, char player)
         {
+            Random random = new Random();
+            int computerIndex = random.Next(1, 10);
             Console.WriteLine("Enter the place you want to mark your move from 1 to 9");
             int userIndex = Convert.ToInt32(Console.ReadLine());
+            
             if (board[userIndex] == ' ')
+            {
                 board[userIndex] = player;
+            }
             else
                 Console.WriteLine("Place already occupied");
             ShowBoard(board);
+        }
+        public static void TossForTurn()
+        {
+            Console.WriteLine("Enter your choice for coin toss 1:Heads 2:tails");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            Random random = new Random();
+            if (choice == random.Next(2))
+                Console.WriteLine("Player won the toss and starts the game");
+            else
+                Console.WriteLine("Computer starts game");
+
         }
     }
 }
