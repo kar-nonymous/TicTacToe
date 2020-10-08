@@ -7,10 +7,9 @@ namespace TicTacToe_Program
         static void Main(string[] args)
         {
             CreateBoard();
-            char playerLetter = PlayerInput();
-            char computerLetter = PlayerInput();
-            Console.WriteLine(playerLetter);
-            Console.WriteLine(computerLetter);
+            
+            PlayerInput();
+           
         }
         public static void CreateBoard()
         {
@@ -21,12 +20,18 @@ namespace TicTacToe_Program
             }
             
         }
-        public static char PlayerInput()
+        public static void PlayerInput()
         {
-            char player = 'X';
-            char computer = 'O';
-            return player;
-            return computer;
+            char player = Convert.ToChar(Console.ReadLine());
+            char computer;
+            if (player == 'X')
+            {
+                computer = 'O';
+            }
+            else if (player == 'O')
+            {
+                computer = 'X';
+            }
         }
     }
 }
