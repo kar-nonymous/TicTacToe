@@ -7,7 +7,6 @@ namespace TicTacToe_Program
         static void Main(string[] args)
         {
             CreateBoard();
-            
             PlayerInput();
            
         }
