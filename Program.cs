@@ -16,13 +16,19 @@ namespace TicTacToe_Program
         public static int[] corner = { 1, 3, 7, 9 };
         static void Main(string[] args)
         {
-            char[] board = CreateBoard();
-            ShowBoard();
-            player = UserInput();
-            computer = ComputerInput();
-            TossForTurn();
-            StartGame();
-            UserMakeMove();
+            while(true)
+            {
+                char[] board = CreateBoard();
+                ShowBoard();
+                player = UserInput();
+                computer = ComputerInput();
+                TossForTurn();
+                StartGame();
+                UserMakeMove();
+                bool playAgain = PlayAgain();
+                if (playAgain == false)
+                    break;
+            }
         }
         public static char[] CreateBoard()
         {
@@ -236,6 +242,17 @@ namespace TicTacToe_Program
                     return corner[index];
             }
             return 0;
+        }
+        public bool PlayAgain()
+        {
+            Console.WriteLine("Play one more game?-------Press Y or N");
+            string playAgainPointer = Console.ReadLine().ToLower();
+            if (playAgainPointer.Equals("y"))
+            {
+                Console.Clear();
+                return true;
+            }
+            return false;
         }
     }
 }
