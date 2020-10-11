@@ -12,6 +12,7 @@ namespace TicTacToe_Program
         public static int userFirstMove = 1;
         public static int computerFirstMove = 0;
         public static int toss;
+        public static int checkIfWin = 1;
         static void Main(string[] args)
         {
             char[] board = CreateBoard();
@@ -95,11 +96,10 @@ namespace TicTacToe_Program
                 }
             }
             ShowBoard();
-            GetComputerMove();
+            GetComputerMove(checkIfWin);
             if (Winner())
                 Console.WriteLine("Congrats you won the game");
         }
-
         public static void ComputerMakeMove()
         {
             bool flag = true;
@@ -202,22 +202,24 @@ namespace TicTacToe_Program
                 return false;
         }
 
-        public static int GetComputerMove()
+        public static int GetComputerMove(int checkIfWin)
         {
-            //check the winning conditions for each block
             for (int block = 1; block < 10; block++)
             {
                 if (board[block] != 'X' && board[block] != 'O')
                 {
-                    board[block] = computer;
+                    board[block] = (checkIfWin == 1) ? computer : player;
                     if (Winner())
                     {
                         board[block] = ' ';
                         return block;
                     }
                     board[block] = ' ';
+                    checkIfWin++;
                 }
             }
+            if(checkIfWin<2)
+                return GetComputerMove(checkIfWin);
             return 0;
         }
     }
