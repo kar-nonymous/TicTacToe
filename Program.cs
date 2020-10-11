@@ -13,6 +13,7 @@ namespace TicTacToe_Program
         public static int computerFirstMove = 0;
         public static int toss;
         public static int checkIfWin = 1;
+        public static int[] corner = { 1, 3, 7, 9 };
         static void Main(string[] args)
         {
             char[] board = CreateBoard();
@@ -155,6 +156,14 @@ namespace TicTacToe_Program
                 ComputerMakeMove();
             }
         }
+        public bool IndexIfAvailable(int index)
+        {
+            //return true if block is empty
+            if (board[index] == ' ')
+                return true;
+            //return false if block is occupied
+            return false;
+        }
         public static bool Winner()
         {
             //Winning condition for first row 
@@ -204,6 +213,7 @@ namespace TicTacToe_Program
 
         public static int GetComputerMove(int checkIfWin)
         {
+            Random random = new Random();
             for (int block = 1; block < 10; block++)
             {
                 if (board[block] != 'X' && board[block] != 'O')
@@ -218,8 +228,13 @@ namespace TicTacToe_Program
                     checkIfWin++;
                 }
             }
-            if(checkIfWin<2)
+            if (checkIfWin <= 2)
                 return GetComputerMove(checkIfWin);
+            for (int index = 0; index < 4; index++)
+            {
+                if (board[corner[index]] == ' ')
+                    return corner[index];
+            }
             return 0;
         }
     }
