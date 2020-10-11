@@ -95,7 +95,7 @@ namespace TicTacToe_Program
                 }
             }
             ShowBoard();
-            ComputerMakeMove();
+            GetComputerMove();
             if (Winner())
                 Console.WriteLine("Congrats you won the game");
         }
@@ -200,6 +200,25 @@ namespace TicTacToe_Program
             }
             else
                 return false;
+        }
+
+        public static int GetComputerMove()
+        {
+            //check the winning conditions for each block
+            for (int block = 1; block < 10; block++)
+            {
+                if (board[block] != 'X' && board[block] != 'O')
+                {
+                    board[block] = computer;
+                    if (Winner())
+                    {
+                        board[block] = ' ';
+                        return block;
+                    }
+                    board[block] = ' ';
+                }
+            }
+            return 0;
         }
     }
 }
